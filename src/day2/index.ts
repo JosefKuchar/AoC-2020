@@ -38,8 +38,8 @@ const goA = (input: Password[]) =>
       : valid
   }, 0);
 
-const goB = (input: Password[]) => {
-  return input.reduce((valid, password) => {
+const goB = (input: Password[]) =>
+  input.reduce((valid, password) => {
     let matches = 0;
     if (password.chars[password.upper - 1] === password.char) {
       matches++;
@@ -49,7 +49,6 @@ const goB = (input: Password[]) => {
     }
     return matches == 1 ? valid + 1 : valid;
   }, 0);
-}
 
 /* Tests */
 
