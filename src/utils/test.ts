@@ -9,7 +9,7 @@ type Test = {
   <T>(result: T): (expected: T) => boolean
 }
 
-export const test: Test = curry((result, expected) => {
+export const test: Test = curry((result: any, expected: any) => {
   const passed = isDeepStrictEqual(result, expected)
 
   if (passed) {
