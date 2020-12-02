@@ -14,6 +14,10 @@ const prepareInput = (rawInput: string): Password[] =>
     .map(line => {
       const parts = line.match(/(\d+)-(\d+) (.): (.*)/);
 
+      if (parts == null) {
+        throw Error;
+      }
+
       return {
         lower: parseInt(parts[1]),
         upper: parseInt(parts[2]),

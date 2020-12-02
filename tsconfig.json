@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2019",
     "allowJs": true,
-    "strict": false,
+    "strict": true,
     "lib": ["dom", "es2019"]
   },
   "include": ["src", "examples/passThrough.ts"],
