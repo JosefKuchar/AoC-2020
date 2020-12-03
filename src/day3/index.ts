@@ -8,7 +8,7 @@ const prepareInput = (rawInput: string) =>
 
 const input = prepareInput(readInput('day3'))
 
-const calcSlope = (input, slopeX, slopeY) => {
+const calcSlope = (input: string[][], slopeX: number, slopeY: number) => {
   let valid = 0;
   for (let x = 0, y = 0; y < input.length; x += slopeX, y += slopeY) {
     if (input[y][x % input[0].length] == '#') {
@@ -18,9 +18,9 @@ const calcSlope = (input, slopeX, slopeY) => {
   return valid;
 };
 
-const goA = (input) => calcSlope(input, 3, 1)
+const goA = (input: string[][]) => calcSlope(input, 3, 1)
 
-const goB = (input) => {
+const goB = (input: string[][]) => {
   const slopes = [
     [1, 1],
     [3, 1],
