@@ -43,7 +43,7 @@ const checkHeight = (value: string) => {
 const checkHairColor = (value: string) => /^#[0-9a-f]{6}$/.test(value);
 
 const checkEyeColor = (value: string) =>
-  /^amb|blu|brn|gry|grn|hzl|oth$/.test(value);
+  /^(amb|blu|brn|gry|grn|hzl|oth)$/.test(value);
 
 const checkPid = (value: string) => /^\d{9}$/.test(value);
 
