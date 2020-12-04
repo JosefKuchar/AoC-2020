@@ -2,13 +2,13 @@ import { test, readInput } from "../utils/index"
 
 const prepareInput = (rawInput: string) => rawInput
 
-const input = prepareInput(readInput())
+const input = prepareInput(readInput('dayx'))
 
-const goA = (input) => {
+const goA = (input: any) => {
   return
 }
 
-const goB = (input) => {
+const goB = (input: any) => {
   return
 }
 
