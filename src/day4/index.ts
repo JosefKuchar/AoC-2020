@@ -102,7 +102,7 @@ test(checkHeight("190"), false);
 
 test(checkHairColor("#123abc"), true);
 test(checkHairColor("#123abz"), false);
-test(checkHeight("123abc"), false);
+test(checkHairColor("123abc"), false);
 
 test(checkEyeColor("brn"), true);
 test(checkEyeColor("wat"), false);
@@ -131,7 +131,7 @@ pid:3556412378 byr:2007`)
 );
 
 test(
-  goA(
+  goB(
     prepareInput(`
 pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2f
