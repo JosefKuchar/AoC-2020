@@ -22,7 +22,7 @@ const goB = (input: number[]) => {
   for (let i = 0; i < input.length - 2; i++) {
     if (
       input[i] !== input[i + 1] - 1 && // Check if next id is missing
-      input[i] !== input[i + 2] - 2 // Check if seat after our potential seat exists
+      input[i] === input[i + 1] - 2 // Check if seat after our potential seat exists
     ) {
       return input[i] + 1;
     }
