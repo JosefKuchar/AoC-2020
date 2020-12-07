@@ -1,14 +1,12 @@
 import { test, readInput } from "../utils/index";
 
-interface BagContains {
-  quantity: number;
-  name: string;
-  ref?: Bag;
-}
-
 interface Bag {
   name: string;
-  contains: BagContains[];
+  contains: {
+    quantity: number;
+    name: string;
+    ref?: Bag;
+  }[];
 }
 
 interface KeyBag {
@@ -60,7 +58,7 @@ const input = prepareInput(readInput("day7"));
 const goA = (input: KeyBag) =>
   Object.values(input).reduce((acc, bag) => (search(bag) ? acc + 1 : acc), -1);
 
-const goB = (input: any) => getCount(input["shiny gold"]) - 1;
+const goB = (input: KeyBag) => getCount(input["shiny gold"]) - 1;
 
 /* Tests */
 
