@@ -3,7 +3,7 @@
     "target": "es2019",
     "allowJs": true,
     "strict": true,
-    "lib": ["dom", "es2019"],
+    "lib": ["dom", "es2019", "es2020.string"],
     "moduleResolution": "node"
   },
   "include": ["src", "examples/passThrough.ts"],
