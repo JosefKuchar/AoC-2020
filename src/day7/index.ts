@@ -33,8 +33,8 @@ const prepareInput = (rawInput: string) => {
     });
 
   Object.values(bags).forEach((bag) => {
-    Object.keys(bag.contains).forEach((key: any) => {
-      bag.contains[key].ref = bags[bag.contains[key].name];
+    bag.contains.forEach((child) => {
+      child.ref = bags[child.name];
     });
   });
 
@@ -42,7 +42,7 @@ const prepareInput = (rawInput: string) => {
 };
 
 const search = (bag: Bag): boolean => {
-  if (bag.contains.some((child) => child.name === "shiny gold")) {
+  if (bag.name === "shiny gold") {
     return true;
   }
 
@@ -58,7 +58,7 @@ const getCount = (bag: Bag): number =>
 const input = prepareInput(readInput("day7"));
 
 const goA = (input: KeyBag) =>
-  Object.values(input).reduce((acc, bag) => (search(bag) ? acc + 1 : acc), 0);
+  Object.values(input).reduce((acc, bag) => (search(bag) ? acc + 1 : acc), -1);
 
 const goB = (input: any) => getCount(input["shiny gold"]) - 1;
 
@@ -79,14 +79,19 @@ dotted black bags contain no other bags.`);
 test(goA(testInput), 4);
 test(goB(testInput), 32);
 
-test(goB(prepareInput(`
+test(
+  goB(
+    prepareInput(`
 shiny gold bags contain 2 dark red bags.
 dark red bags contain 2 dark orange bags.
 dark orange bags contain 2 dark yellow bags.
 dark yellow bags contain 2 dark green bags.
 dark green bags contain 2 dark blue bags.
 dark blue bags contain 2 dark violet bags.
-dark violet bags contain no other bags.`)), 126);
+dark violet bags contain no other bags.`)
+  ),
+  126
+);
 
 /* Results */
 
