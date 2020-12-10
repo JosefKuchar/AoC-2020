@@ -38,7 +38,7 @@ const findBounds = (numbers: number[], start: number) => {
 }
 
 // Might not be sufficient for all inputs
-const findCombinations = (numbers: number[], lower: number, upper: number) => {
+const findCombinations = (lower: number, upper: number) => {
   const diff = upper - lower;
 
   switch (diff) {
@@ -58,9 +58,10 @@ const findCombinations = (numbers: number[], lower: number, upper: number) => {
 const goB = (input: number[]) => {
   let combinations = 1;
   let index = 0;
+
   while (index < input.length - 1) {
     let newIndex = findBounds(input, index);
-    combinations *= findCombinations(input, index, newIndex);
+    combinations *= findCombinations(index, newIndex);
     index = newIndex;
   }
 
