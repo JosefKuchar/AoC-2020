@@ -88,7 +88,7 @@ const goB = (input: any[]) => {
   let mask = { ones: 0n, floating: 0n };
   let mem: KeyVal = {};
   let sum = 0n;
-  input.forEach((line, i) => {
+  input.forEach((line) => {
     if (line.type === "mask") {
       mask = line;
     } else {
@@ -104,7 +104,6 @@ const goB = (input: any[]) => {
         mem[index] = line.val
         sum += line.val
       })
-      return addr;
     }
   });
   return Number(sum);
@@ -139,7 +138,6 @@ mem[26] = 1`)
 console.time("Time");
 const resultA = goA(input);
 const resultB = goB(input);
-console.log('asdfsaf');
 console.timeEnd("Time");
 
 console.log("Solution to part 1:", resultA);
