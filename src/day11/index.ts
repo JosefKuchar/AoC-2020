@@ -8,36 +8,49 @@ const prepareInput = (rawInput: string) =>
 
 const input = prepareInput(readInput("day11"));
 
-const getNeighbours = (input: string[][], x: number, y: number) => {
+const getNeighbours = (
+  state: string[][],
+  x: number,
+  y: number,
+  long: boolean
+) => {
   let count = 0;
-  for (let i = x - 1; i <= x + 1; i++) {
-    for (let j = y - 1; j <= y + 1; j++) {
-      if (
-        i >= 0 &&
-        j >= 0 &&
-        (i !== x || j !== y) &&
-        i < input.length &&
-        j < input[0].length &&
-        input[i][j] === "#"
-      ) {
-        count++;
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      if (i !== 0 || j !== 0) {
+        for (let k = 1; ; k++) {
+          const a = x + i * k;
+          const b = y + j * k;
+
+          if (a >= 0 && b >= 0 && a < state.length && b < state[0].length) {
+            if (state[a][b] === "#") {
+              count++;
+              break;
+            }
+            if (state[a][b] === "L" || !long) {
+              break;
+            }
+          } else {
+            break;
+          }
+        }
       }
     }
   }
   return count;
 };
 
-const calcState = (input: string[][]) => {
+const calcState = (state: string[][], long: boolean, treshold: number) => {
   let newState: string[][] = [];
-  for (let i = 0; i < input.length; i++) {
+  for (let i = 0; i < state.length; i++) {
     newState[i] = [];
-    for (let j = 0; j < input[0].length; j++) {
-      const val = input[i][j];
+    for (let j = 0; j < state[0].length; j++) {
+      const val = state[i][j];
       newState[i][j] = val;
-      if (val === "L" && getNeighbours(input, i, j) === 0) {
+      if (val === "L" && getNeighbours(state, i, j, long) === 0) {
         newState[i][j] = "#";
       }
-      if (val === "#" && getNeighbours(input, i, j) >= 4) {
+      if (val === "#" && getNeighbours(state, i, j, long) >= treshold) {
         newState[i][j] = "L";
       }
     }
@@ -45,27 +58,29 @@ const calcState = (input: string[][]) => {
   return newState;
 };
 
-const showState = (input: string[][]) => {
-  input.forEach((row) => {
-    console.log(row.join(""));
-  });
-};
-
-const goA = (input: string[][]) => {
-  let state = input;
-  for (let i = 0; i < 500; i++) {
-    state = calcState(state);
-  }
-
-  return state.reduce(
+const count = (state: string[][]) =>
+  state.reduce(
     (acc, row) =>
       row.reduce((acc2, val) => (val === "#" ? acc2 + 1 : acc2), 0) + acc,
     0
   );
+
+const goA = (input: string[][]) => {
+  let state = input;
+  for (let i = 0; i < 500; i++) {
+    state = calcState(state, false, 4);
+  }
+
+  return count(state);
 };
 
-const goB = (input: any) => {
-  return;
+const goB = (input: string[][]) => {
+  let state = input;
+  for (let i = 0; i < 500; i++) {
+    state = calcState(state, true, 5);
+  }
+
+  return count(state);
 };
 
 /* Tests */
@@ -83,6 +98,7 @@ L.LLLLLL.L
 L.LLLLL.LL`);
 
 test(goA(testInput), 37);
+test(goB(testInput), 26);
 
 /* Results */
 
